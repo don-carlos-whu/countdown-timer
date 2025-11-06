@@ -1,25 +1,57 @@
 <!DOCTYPE html>
-<html>
+<html lang="de">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Countdown Timer</title>
 <style>
-body{margin:0;padding:0;font-family:Arial,sans-serif}
+body {
+  margin: 0;
+  padding: 0;
+  background: transparent;
+}
 </style>
 </head>
 <body>
-<div style="background:linear-gradient(135deg,#e60c3e,#ff006b);padding:25px;border-radius:12px;text-align:center;color:#fff">
-<div style="font-size:22px;font-weight:bold;margin-bottom:15px">Sonderaktion endet in:</div>
-<div id="timer" style="font-size:32px;font-weight:bold">Lädt...</div>
+<div id="timer" style="background:linear-gradient(135deg,#ff0040,#ff1493);color:#fff;padding:30px;border-radius:15px;text-align:center;font-family:Arial,sans-serif">
+<div style="font-size:22px;font-weight:bold;margin-bottom:20px">Angebot endet in:</div>
+<div style="display:flex;justify-content:center;gap:15px;flex-wrap:wrap">
+<div style="background:rgba(255,255,255,0.2);padding:15px 20px;border-radius:10px;min-width:80px">
+<div id="d" style="font-size:36px;font-weight:bold">00</div>
+<div style="font-size:14px;margin-top:5px">Tage</div>
 </div>
+<div style="background:rgba(255,255,255,0.2);padding:15px 20px;border-radius:10px;min-width:80px">
+<div id="h" style="font-size:36px;font-weight:bold">00</div>
+<div style="font-size:14px;margin-top:5px">Stunden</div>
+</div>
+<div style="background:rgba(255,255,255,0.2);padding:15px 20px;border-radius:10px;min-width:80px">
+<div id="m" style="font-size:36px;font-weight:bold">00</div>
+<div style="font-size:14px;margin-top:5px">Minuten</div>
+</div>
+</div>
+</div>
+
 <script>
-setInterval(function(){
-var t=new Date('2025-11-30T23:59:59')-new Date();
-if(t<0){document.getElementById('timer').innerHTML='Abgelaufen!';return;}
-var d=Math.floor(t/86400000);
-var h=Math.floor(t%86400000/3600000);
-var m=Math.floor(t%3600000/60000);
-document.getElementById('timer').innerHTML=d+'T '+h+'Std. '+m+'Min.;
-},1000);
+function updateCountdown() {
+  const endDate = new Date("2025-11-30T23:59:59").getTime();
+  const now = new Date().getTime();
+  const timeLeft = endDate - now;
+  
+  if (timeLeft > 0) {
+    const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+    
+    document.getElementById("d").innerText = days;
+    document.getElementById("h").innerText = hours;
+    document.getElementById("m").innerText = minutes;
+  } else {
+    document.getElementById("timer").innerHTML = '<div style="font-size:24px;font-weight:bold">Aktion beendet!</div>';
+  }
+}
+
+updateCountdown();
+setInterval(updateCountdown, 1000);
 </script>
 </body>
 </html>
