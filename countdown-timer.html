@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<style>
+body{margin:0;padding:0;font-family:Arial,sans-serif}
+</style>
+</head>
+<body>
+<div style="background:linear-gradient(135deg,#e60c3e,#ff006b);padding:25px;border-radius:12px;text-align:center;color:#fff">
+<div style="font-size:22px;font-weight:bold;margin-bottom:15px">Sonderaktion endet in:</div>
+<div id="timer" style="font-size:32px;font-weight:bold">Lädt...</div>
+</div>
+<script>
+setInterval(function(){
+var t=new Date('2025-11-30T23:59:59')-new Date();
+if(t<0){document.getElementById('timer').innerHTML='Abgelaufen!';return;}
+var d=Math.floor(t/86400000);
+var h=Math.floor(t%86400000/3600000);
+var m=Math.floor(t%3600000/60000);
+var s=Math.floor(t%60000/1000);
+document.getElementById('timer').innerHTML=d+'T '+h+'H '+m+'M '+s+'S';
+},1000);
+</script>
+</body>
+</html>
